@@ -2,14 +2,16 @@
 
 
 {% block title %}
-
+  Create a Page
 {% endblock %}
 
-
-
 {% block body %}
+  
+  <form action="{% url 'create_page' %}" method="POST">
+    {%csrf_token %}
 
-
-
-
+    <textarea  name="title" placeholder="Write the title of the page here." class="title"></textarea>
+    <textarea id="form_body" name="body" placeholder="Write the body of the page here."></textarea>
+    <div><input type="submit" value="Create Page"></div>
+  </form>
 {% endblock body %}

@@ -17,6 +17,11 @@ textarea {
     width: 80%;
 }
 
+#form_body{
+    height: 80vh;
+}
+
+
 .main {
     padding: 10px;
 }
@@ -35,4 +40,13 @@ textarea {
 
 .sidebar h2 {
     margin-top: 5px;
+}
+
+.txt{
+    float:right;
+    margin: 10px 50px 10px 10px;
+}
+
+.title{
+    height: 60px;
 }

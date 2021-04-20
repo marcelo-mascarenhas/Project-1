@@ -10,6 +10,11 @@
 
 {{ body | safe}}
 
+  <form class = "txt" action = "{% url 'edt' title %}" method = "POST">
+    {%csrf_token %}
+    <input type="submit" value="Edit Page">
+  </form>
+
 {% endblock body %}
 
 

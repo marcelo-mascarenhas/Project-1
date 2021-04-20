@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.http import HttpResponse
 import markdown2
 import random
 from . import util
@@ -50,3 +51,36 @@ def search(request):
             return render(request, "encyclopedia/search.html",
             { "suggestions": list_of_entries
             })
+
+def create(request):
+    return render(request, "encyclopedia/create_new_page.html")
+
+def create_page(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        if util.get_entry(title) != None:
+            return HttpResponse("<h1>This page already exists. Please, enter a title that doesn't exists yet.</h1>")
+        elif title == "":
+            return HttpResponse('<h1>Please, enter a valid title.</h1>')
+        else:
+            body = request.POST['body']
+            util.save_entry(title, body)
+            return redirect('entries', html=title)
+            
+            
+
+def edt(request, name):
+    if request.method == "POST":
+        body = util.get_entry(name)
+        return render(request, "encyclopedia/edit_page.html", {
+            'title': name, 'body':body
+        })
+
+def confirm_edit(request):
+    if request.method == "POST":
+        title = request.POST['title']
+        body = request.POST['body']
+        util.save_entry(title, body)
+        return redirect('entries', html=title)
+
+
